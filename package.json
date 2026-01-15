@@ -1,0 +1,11 @@
+{
+  "name": "github-actions-learning",
+  "version": "1.0.0",
+  "description": "Learning GitHub Actions",
+  "scripts": {
+    "test": "echo 'No tests yet'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
