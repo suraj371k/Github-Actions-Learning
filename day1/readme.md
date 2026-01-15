@@ -165,3 +165,103 @@ jobs:
 5. Installs project dependencies
 6. Runs tests
 7. Reports success/failure
+
+### Interview Questions
+
+### **1. What is GitHub Actions and how does it differ from traditional CI/CD tools?**
+
+*Expected Answer:* GitHub Actions is a CI/CD platform integrated directly into GitHub. Unlike traditional tools like Jenkins that require separate servers, it runs workflows in GitHub's cloud infrastructure, offers tight GitHub integration, and uses a marketplace of reusable actions.
+
+### **2. What are the different types of events that can trigger a GitHub Actions workflow?**
+
+GitHub Actions workflows can be triggered by three main categories of events: **repository events** (code changes), **scheduled events** (time-based), and **manual events** (on-demand triggers). Let me break down the most commonly used ones
+
+## 1. Repository Events
+
+These trigger based on activities in the repository:
+
+**push** - When code is pushed to any branch
+
+```yaml
+`on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'src/**'`
+```
+
+**pull_request** - When a PR is opened, updated, or synchronized
+
+```yaml
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+```
+
+**release** - When a release is published
+
+```yaml
+on:
+  release:
+    types: [published, created]
+```
+
+## 2. Scheduled Events
+
+For time-based automation using cron syntax:
+
+```yaml
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Daily at midnight UTC
+    - cron: '0 */6 * * *'  # Every 6 hours
+```
+
+## 3. Manual Triggers
+
+**workflow_dispatch** - Allows manual triggering from the GitHub UI:
+
+```yaml
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+```
+
+## 4. External Events
+
+**repository_dispatch** - Triggered by external systems via GitHub API:
+
+```yaml
+on:
+  repository_dispatch:
+    types: [deploy-prod]
+```
+
+### **3. What is the difference between `runs-on` and `uses` in a workflow?**
+
+ `runs-on` specifies the runner environment (ubuntu-latest, windows-latest, macos-latest) where the job executes. `uses` imports a pre-built action from the marketplace or a repository.
+
+### **4. How do you manually trigger a GitHub Actions workflow?**
+
+Use the `workflow_dispatch` event in the workflow file. This adds a "Run workflow" button in the Actions tab of the repository.
+
+### **5. What is the purpose of the `actions/checkout` action?**
+
+It checks out your repository code into the runner so subsequent steps can access the files. Without it, the runner starts empty.
+
+### 6. **What are GitHub-hosted runners vs self-hosted runners?**
+
+GitHub-hosted runners are virtual machines managed by GitHub (free tier included). Self-hosted runners are your own machines/servers that you configure and maintain for more control or specific requirements.
+
+### 7. **What happens if you don't specify an `on` trigger in your workflow?**
+
+The workflow won't run automatically. You must specify at least one trigger event (like push, pull_request, or workflow_dispatch) for the workflow to execute.
