@@ -10,11 +10,12 @@ A 7-day structured learning path to master GitHub Actions and CI/CD automation.
 - Creating first workflow with YAML
 - Learn about yaml
 
-<!-- ### Day 2: Workflow Syntax
+ ### Day 2: Workflow Syntax
 - Understanding events, jobs, and steps
-- Working with actions from marketplace
 - Environment variables and secrets
+- Expressions , operators ,functions
 
+<!--
 ### Day 3: Building & Testing
 - Automated build processes
 - Running unit and integration tests
